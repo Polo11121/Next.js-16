@@ -1,0 +1,24 @@
+import Image from "next/image";
+import Link from "next/link";
+
+export const Navbar = () => (
+  <header>
+    <nav>
+      <Link href="/" className="logo">
+        <Image src="/icons/logo.png" alt="logo" height={24} width={24} />
+        <p>DevEvent</p>
+      </Link>
+      <ul>
+        <li>
+          <Link href="/">Home</Link>
+        </li>
+        <li>
+          <Link href="/events">Event</Link>
+        </li>
+        <li>
+          <Link href="/create-event">Create Event</Link>
+        </li>
+      </ul>
+    </nav>
+  </header>
+);
