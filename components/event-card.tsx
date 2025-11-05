@@ -1,14 +1,14 @@
 import Image from "next/image";
 import Link from "next/link";
 
-type EventCardProps = {
+interface EventCardProps {
   image: string;
   title: string;
   slug: string;
   location: string;
   date: string;
   time: string;
-};
+}
 
 export const EventCard = ({
   title,
