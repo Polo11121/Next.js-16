@@ -1,5 +1,5 @@
-export { default as Event } from "./event.model";
-export { default as Booking } from "./booking.model";
+export { default as Event } from "@/database/event.model";
+export { default as Booking } from "@/database/booking.model";
 
-export type { IEvent } from "./event.model";
-export type { IBooking } from "./booking.model";
+export type { IEvent } from "@/database/event.model";
+export type { IBooking } from "@/database/booking.model";
