@@ -1,4 +1,5 @@
 import { IEvent } from "@/database";
+import { cacheLife } from "next/cache";
 import { notFound } from "next/navigation";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL!;
@@ -28,6 +29,8 @@ const handleResponse = async (res: Response) => {
 };
 
 export const fetchEvents = async (): Promise<FetchEventsResponse> => {
+  "use cache";
+  cacheLife("hours");
   const res = await fetch(`${API_URL}/events`);
 
   return handleResponse(res);
@@ -36,7 +39,13 @@ export const fetchEvents = async (): Promise<FetchEventsResponse> => {
 export const fetchEventBySlug = async (
   slug: string
 ): Promise<FetchEventBySlugResponse> => {
-  const res = await fetch(`${API_URL}/events/${slug}`);
+  "use cache";
+  cacheLife("hours");
+  const res = await fetch(`${API_URL}/events/${slug}`, {
+    next: {
+      revalidate: 60,
+    },
+  });
 
   return handleResponse(res);
 };

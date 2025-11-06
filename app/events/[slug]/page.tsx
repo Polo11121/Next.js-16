@@ -4,6 +4,8 @@ import { EventDetailItem } from "@/app/events/[slug]/_components/event-detail-it
 import { EventAgenda } from "@/app/events/[slug]/_components/event-agenda";
 import { EventTags } from "@/app/events/[slug]/_components/event-tags";
 import { BookEvent } from "@/app/events/[slug]/_components/book-event";
+import { getSimilarEventsBySlug } from "@/actions/events";
+import { EventCard } from "@/components/event-card";
 
 interface EventsSlugPageParams {
   params: Promise<{ slug: string }>;
@@ -12,6 +14,7 @@ interface EventsSlugPageParams {
 export const EventsSlugPage = async ({ params }: EventsSlugPageParams) => {
   const { slug } = await params;
   const { event } = await fetchEventBySlug(slug);
+  const similarEvents = await getSimilarEventsBySlug(slug);
 
   const {
     description,
@@ -87,13 +90,13 @@ export const EventsSlugPage = async ({ params }: EventsSlugPageParams) => {
         </aside>
       </div>
       <div className="flex w-full flex-col gap-4 pt-20">
-        {/* <h2>Similar Events</h2>
+        <h2>Similar Events</h2>
         <div className="events">
           {similarEvents.length > 0 &&
-            similarEvents.map((similarEvent: IEvent) => (
-              <EventCard key={similarEvent.title} {...similarEvent} />
+            similarEvents.map((similarEvent) => (
+              <EventCard {...similarEvent} key={similarEvent.title} />
             ))}
-        </div> */}
+        </div>
       </div>
     </section>
   );
